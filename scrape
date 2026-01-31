@@ -1,22 +1,11 @@
 #!/bin/bash
-# Ultra simple scraper - just pass the URL
+# Ultra simple scraper - now using AgentQL (formerly TinyFish)
 
-# Check if TinyFish is working
-TEST_RESULT=$(cd ~/.openclaw/workspace && python3 -c "
-import requests
-try:
-    r = requests.get('https://tinyfish.ai', timeout=3)
-    if 'tinyfish' in r.text.lower():
-        print('OK')
-except:
-    print('FAIL')
-" 2>/dev/null)
-
-if [ "$TEST_RESULT" != "OK" ]; then
-    echo "⚠️  TinyFish API appears to be down or changed"
-    echo "The service moved from api.tinyfish.io to tinyfish.ai"
-    echo "Their API structure may have changed - checking for updates..."
-    echo ""
+# Check if API key exists
+if [ -z "$AGENTQL_API_KEY" ]; then
+    if [ -f ~/.openclaw/workspace/.env.agentql ]; then
+        export $(cat ~/.openclaw/workspace/.env.agentql | grep -v '^#' | xargs)
+    fi
 fi
 
-cd ~/.openclaw/workspace && python3 tinyfish-scraper.py "$1"
+cd ~/.openclaw/workspace && python3 agentql-scraper.py "$@"

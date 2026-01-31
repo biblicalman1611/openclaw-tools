@@ -1,4 +1,4 @@
-# 🐟 TinyFish Super Scraper - Your Secret Weapon
+# 🤖 AgentQL Super Scraper - Your Secret Weapon (formerly TinyFish)
 
 ## What This Does
 

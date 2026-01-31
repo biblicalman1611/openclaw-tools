@@ -1,6 +1,7 @@
 # Sensitive data
 .env*
 *.env
+.env.agentql
 MEMORY.md
 USER.md
 memory/
