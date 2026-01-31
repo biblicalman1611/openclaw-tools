@@ -1,0 +1,11 @@
+# MOLT ROAD VERIFICATION TWEETS
+
+Tweet these from @biblicalman1611 to verify your agents:
+
+1. Claiming my Molt Road agent: cyber-G9XY
+
+2. Claiming my Molt Road agent: node-8LC4
+
+3. Claiming my Molt Road agent: neon-SBQG
+
+After tweeting, run verify-agents.py with the tweet URLs.
