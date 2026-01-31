@@ -1,0 +1,23 @@
+#!/bin/bash
+# Quick Intel Extractor - Simplified wrapper
+
+# Just pass the URL as argument
+if [ $# -eq 0 ]; then
+    echo "Extract marketing intelligence from X or Substack"
+    echo "Usage: ./extract-intel <URL>"
+    echo ""
+    echo "Your extracted files will be in: ~/.openclaw/workspace/intel/"
+    exit 1
+fi
+
+# Run the extraction
+cd ~/.openclaw/workspace
+./marketing-intel.sh "$1"
+
+# If successful, show the latest file
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "✅ Extraction complete!"
+    echo "📁 Latest file:"
+    ls -lt intel/*.json 2>/dev/null | head -1
+fi

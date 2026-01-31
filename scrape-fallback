@@ -1,0 +1,44 @@
+#!/bin/bash
+# Fallback scraper using web_fetch when TinyFish fails
+
+URL="$1"
+
+if [ -z "$URL" ]; then
+    echo "Usage: $0 <URL>"
+    exit 1
+fi
+
+echo "🔍 Attempting to scrape: $URL"
+
+# Try TinyFish first
+OUTPUT=$(~/.openclaw/workspace/scrape "$URL" 2>&1)
+
+if [[ $OUTPUT == *"Error"* ]] || [[ $OUTPUT == *"405"* ]]; then
+    echo "⚠️  TinyFish failed, using fallback method..."
+    
+    # Determine platform
+    if [[ $URL == *"x.com"* ]] || [[ $URL == *"twitter.com"* ]]; then
+        echo "❌ X/Twitter requires browser scraping or API access"
+        echo "Please use the browser tool with Chrome extension attached"
+    elif [[ $URL == *"substack.com"* ]]; then
+        # Use marketing-intel.sh for Substack
+        ~/.openclaw/workspace/marketing-intel.sh "$URL"
+    else
+        # Generic fallback - create a simple fetch
+        echo "📥 Using basic web fetch..."
+        TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+        FILENAME="intel/fallback_${TIMESTAMP}.txt"
+        
+        # Just save the URL for manual inspection
+        echo "URL: $URL" > "$FILENAME"
+        echo "Fetched: $(date)" >> "$FILENAME"
+        echo "" >> "$FILENAME"
+        echo "Note: TinyFish API is currently unavailable." >> "$FILENAME"
+        echo "For X/Twitter: Use browser tool with Chrome extension" >> "$FILENAME"
+        echo "For other sites: Try web_fetch tool in OpenClaw" >> "$FILENAME"
+        
+        echo "✅ Saved reference to: $FILENAME"
+    fi
+else
+    echo "$OUTPUT"
+fi

@@ -1,0 +1,44 @@
+# Sensitive data
+.env*
+*.env
+MEMORY.md
+USER.md
+memory/
+sessions/
+auth-profiles.json
+
+# Personal context
+SOUL.md
+IDENTITY.md
+HEARTBEAT.md
+
+# Cache and temp files
+*.pyc
+__pycache__/
+*.log
+*.tmp
+.DS_Store
+
+# Transcripts with personal data
+transcripts/
+
+# Node modules if any
+node_modules/
+
+# API keys and credentials
+*api_key*
+*API_KEY*
+*secret*
+*SECRET*
+
+# Intel gathered (may contain private data)
+intel/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OpenClaw system files
+.openclaw-state/
+openclaw-state.json
